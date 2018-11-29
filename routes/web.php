@@ -19,6 +19,11 @@ Route::get('/', function() {
     return view('index');
 });
 
+Route::get('/products', [
+    'uses' => 'ProductController@getProducts',
+    'as' => 'product.index'
+]);
+
 Route::group(['prefix' => 'user'], function() {
 
     Route::group(['middleware' => 'guest' ], function() {
