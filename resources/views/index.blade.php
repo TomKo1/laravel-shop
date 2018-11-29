@@ -1,1 +1,4 @@
-<h1> Welcome on the sample shop index page </h1>
+@extends('layouts.master')
+@section('content')
+  <p>Witam bardzo serdecznie</p>
+@endsection
