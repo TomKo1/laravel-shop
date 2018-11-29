@@ -12,5 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.signup');
 });
+
+// Route::get('/signup', 'UserController@signup');
+
+// Route::post('/signin', 'UserController@signin');
+
+Route::get('/signup', [
+    'uses' => 'UserController@getSignup',
+    'as' => 'user.signup'
+]);
+
+Route::post('/signup', [
+    'uses' => 'UserController@postSignup',
+    'as' => 'user.signup'
+]);
