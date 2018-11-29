@@ -1,0 +1,1 @@
+<h1> Welcome on the sample shop index page </h1>
