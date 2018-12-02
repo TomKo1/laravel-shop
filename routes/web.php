@@ -11,18 +11,29 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('product.index');
-// });
 
-Route::get('/', function() {
-    return view('index');
-});
-
-Route::get('/products', [
+Route::get('/', [
     'uses' => 'ProductController@getProducts',
     'as' => 'product.index'
 ]);
+
+Route::group(['prefix' => 'product'], function() {
+
+    Route::group(['middleware' => 'auth'], function() {
+
+        Route::get('/newproduct', [
+            'uses' => 'ProductController@newProduct',
+            'as' => 'product.new'
+        ]);
+
+        Route::post('/newproduct', [
+            'uses' => 'ProductController@createProduct',
+            'as' => 'product.new'
+        ]);
+
+    });
+});
+
 
 Route::group(['prefix' => 'user'], function() {
 

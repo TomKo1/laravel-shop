@@ -9,7 +9,6 @@
     </head>
     <body>
         @include('partials.navbar')
-        <h1>Welcome page!</h1>
         <div class="container">
             @yield('content')
         </div>
