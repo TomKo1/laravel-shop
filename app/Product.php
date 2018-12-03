@@ -13,7 +13,15 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'price', 'brand', 'quantity'
+        'name', 'description', 'price', 'brand', 'quantity', 'name'
+    ];
+
+    /**
+     * To cast json from db to array
+     * https://stackoverflow.com/questions/32954424/laravel-migration-array-type-store-array-in-database-column/32955501#32955501
+     */
+    protected $casts = [
+        'images' => 'array'
     ];
 
     /**

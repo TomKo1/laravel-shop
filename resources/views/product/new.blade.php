@@ -10,7 +10,7 @@
       @endforeach
       </div>
       @endif
-      <form action="{{ route('product.new') }}" method="post">
+      <form action="{{ route('product.new') }}" method="post" enctype="multipart/form-data">
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" placeholder="Name" class="form-control">
@@ -31,6 +31,12 @@
           <label for="quantity">Quantity</label>
           <input type="number" min="1" max="1000000" id="quantity" name="quantity" class="form-control">
         </div>
+
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" name="images[]" id="image" class="form-control" multiple>
+        </div>
+
         <button type="submit" class="btn btn-primary">Sign up</button>
         {{ csrf_field() }}
       </form>
