@@ -34,8 +34,8 @@
 
         <div class="form-group">
             <label for="image">Image</label>
-            <input type="file" name="images[]" id="image" class="form-control" multiple>
-        </div>
+            <input required type="file" class="form-control" name="images[]" placeholder="address" multiple>
+         </div>
 
         <button type="submit" class="btn btn-primary">Sign up</button>
         {{ csrf_field() }}

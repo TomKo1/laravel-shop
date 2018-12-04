@@ -21,6 +21,7 @@ class ProductController extends Controller
 
     public function createProduct(Request $request) {
         // TODO: make request objects & change 2000 to be 2MB
+        //TODO: make specific message only for 'images.*.max
         $this->validate($request, [
             'name' => 'required|min:5|max:255',
             'description' => 'min:10|max:500',
@@ -28,37 +29,34 @@ class ProductController extends Controller
             'brand' => 'max:50',
             'quantity' => 'required|numeric|between:1,1000000',
             'images' => 'required',
-            'image.*' => 'image|mimes:png,jpeg,gif,jpg|max:2048'
+            'images.*' => 'image|mimes:png,jpeg,gif,jpg|max:2048'
+        ],
+        [
+            'images.*' => 'Images be in png / jpeg / gif / jpg format and have up to 2 MB'
         ]);
 
-        error_log('Before storing image!');
         $files = $request->file('images');
+        $filePathsArray = [];
+        $productName = $request->input('name');
+        // it is also possible to upload images to separate table
         foreach($files as $file) {
-            // create name
-            $filename = now().$request->input('name').'.'.$file->extension();
-            // stroe this image using this name
+            $filename = now()->timestamp.$file->getClientOriginalName();
             $file->storeAs('public', $filename);
-            // append the path to the image to the array
+            array_push($filePathsArray, $filename);
         }
 
-        // Of course, once a file has been
-        // stored and the symbolic link has
-        // been created, you can create a
-        // URL to the files using the asset helper:
-        // echo asset('storage/file.txt');
-
         $product = new Product([
-            'name' => $request->input('name'),
+            'name' => $productName,
             'description' => $request->input('description'),
             'price' => $request->input('price'),
             'brand' => $request->input('brand'),
-            'quantity' => $request->input('quantity')
+            'quantity' => $request->input('quantity'),
+            'images' => $filePathsArray
         ]);
 
         $product->save();
 
         return redirect('/');
-
     }
 
 }
