@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Address;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -12,10 +13,18 @@ class UserController extends Controller
         return view('user.signup');
     }
 
+    //TOOD: multiple addresses
     public function postSignup(Request $request) {
         $this->validate($request, [
             'email' => 'email|required|unique:users',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
+            'street' => 'required',
+            'city' => 'required',
+            'zip_code' =>
+                array(
+                    'required',
+                    'regex:/^[0-9]{2}-[0-9]{3}?$/'
+                )
         ]);
 
         $user = new User([
@@ -24,6 +33,15 @@ class UserController extends Controller
         ]);
 
         $user->save();
+
+        $address = new Address([
+            'street' => $request->input('street'),
+            'city' => $request->input('city'),
+            'zip_code' => $request->input('zip_code'),
+            'user_id' => $user->id
+        ]);
+
+        $address->save();
 
         Auth::login($user);
 
