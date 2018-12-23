@@ -60,14 +60,19 @@ class UserController extends Controller
 
         // try to log in the user
         if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
-            return redirect()->route('user.profile');
+            return redirect()->route('user.profile', ['id' => Auth::user()->id]);
         }
 
         return redirect('/');
     }
 
-    public function getProfile() {
-        return view('user.profile');
+    public function getProfile($id) {
+        $user = User::where('id', $id)->first();
+        $addresses = $user->addresses;
+        error_log('-------');
+        error_log(get_class($addresses));
+        error_log('-------');
+        return view('user.profile')->with('user', $user)->with('addresses', $addresses);
     }
 
     public function getLogout() {
