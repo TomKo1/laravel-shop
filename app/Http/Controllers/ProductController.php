@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Cart;
 use Illuminate\Http\Request;
 use Auth;
+use Session;
 
 class ProductController extends Controller
 {
@@ -59,4 +61,38 @@ class ProductController extends Controller
         return redirect('/');
     }
 
+    public function getAddToCart(Request $request, $id) {
+        $product = Product::find($id);
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+        return redirect()->route('product.index');
+    }
+
+    public function getShoppingCart(Request $request) {
+        if(!Session::has('cart')) {
+            return view('shop.shopping-cart');
+        }
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
+
+    public function removeFromCart(Request $request, $id, $quantity) {
+        // fetch old cart
+        $cart = Session::get('cart');
+        $product = Product::find($id);
+
+        $cart->removeProduct($product, $id, $quantity);
+        if($cart->isEmpty()) {
+            Session::forget('cart');
+        } else {
+            Session::put('cart', $cart);
+        }
+        // Session::put('cart', $cart);
+        return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
 }

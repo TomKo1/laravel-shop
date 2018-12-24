@@ -16,12 +16,12 @@
       <li>{{ $product->brand }}</li>
       Quantity:
       <li>{{ $product->quantity }}</li>
+      <li><a href={{ route('product.addToCart', ['id' => $product->id]) }} class="btn btn-success" role="button">Buy</a></li>
     </ul>
     <p> Name: {{ $product->name }} </p>
 
 
     @foreach($product->images as $path)
-
       <img src="{{ asset("storage/$path") }}" />
     @endforeach
 

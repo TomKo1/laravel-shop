@@ -17,6 +17,21 @@ Route::get('/', [
     'as' => 'product.index'
 ]);
 
+Route::get('/add-to-cart/{id}', [
+    'uses' => 'ProductController@getAddToCart',
+    'as' => 'product.addToCart'
+]);
+
+Route::get('/removeFromCart/{id}/{quantity}', [
+    'uses' => 'ProductController@removeFromCart',
+    'as' => 'product.removeFromCart'
+]);
+
+Route::get('/shoppingCart', [
+    'uses' => 'ProductController@getShoppingCart',
+    'as' => 'product.shoppingCart'
+]);
+
 Route::group(['prefix' => 'product'], function() {
 
     Route::group(['middleware' => 'auth'], function() {
