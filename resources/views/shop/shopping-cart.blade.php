@@ -26,7 +26,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-12 col-md-offset-3 col-sm-offset-3 align-self-center">
         <strong>Total: {{ $totalPrice }}</strong><br>
-        <button type="button" class="btn btn-success">Checkout</button>
+        <a href={{ route('checkout') }} type="button" class="btn btn-success">Checkout</a>
       </div>
     </div>
   @else

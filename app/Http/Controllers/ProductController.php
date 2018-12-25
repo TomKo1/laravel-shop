@@ -7,6 +7,8 @@ use App\Cart;
 use Illuminate\Http\Request;
 use Auth;
 use Session;
+use Stripe\Stripe;
+use Stripe\Charge;
 
 class ProductController extends Controller
 {
@@ -92,7 +94,50 @@ class ProductController extends Controller
         } else {
             Session::put('cart', $cart);
         }
-        // Session::put('cart', $cart);
+
         return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
+
+    public function postCheckout(Request $request) {
+        if(!Session::has('cart')) {
+            return redirect()->route('product.shoppingCart');
+        }
+
+        $secretKey = env('SECRET_STRIPE_KEY', false);
+        if($secretKey == false) {
+           // return view();
+           // do something
+        }
+
+        Stripe::setApikey($secretKey);
+        // Token is created using Checkout or Elements!
+// Get the payment token ID submitted by the form:
+// $token = $_POST['stripeToken'];
+        try {
+            Charge::create(array(
+                "amount" => $cart->totalPrice * 100,
+                "currency" => "usd",
+                "source" => $request->input('stripeToken'),
+                "description"=>"Test Charge"
+            ));
+        } catch (\Exception $e) {
+            return redirect()->route('checkout')->with('error', $e->getMessage());
+        }
+
+        Session::forget('cart');
+
+        return redirect()->route('product.index')->with('success', 'Successfully purchased products!');
+    }
+
+    public function getCheckout() {
+        if(!Session::has('cart')) {
+            return view('shop.shopping-cart');
+        }
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $totalPrice = $cart->totalPrice;
+        return view('shop.checkout', ['totalPrice' => $totalPrice]);
+    }
+
 }

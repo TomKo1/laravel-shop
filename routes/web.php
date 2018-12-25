@@ -22,6 +22,16 @@ Route::get('/add-to-cart/{id}', [
     'as' => 'product.addToCart'
 ]);
 
+Route::post('/checkout', [
+    'uses' => 'ProductController@postCheckout',
+    'as' => 'checkout'
+]);
+
+Route::get('/checkout', [
+    'uses' => 'ProductController@getCheckout',
+    'as' => 'checkout'
+]);
+
 Route::get('/removeFromCart/{id}/{quantity}', [
     'uses' => 'ProductController@removeFromCart',
     'as' => 'product.removeFromCart'
