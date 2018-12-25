@@ -24,12 +24,14 @@ Route::get('/add-to-cart/{id}', [
 
 Route::post('/checkout', [
     'uses' => 'ProductController@postCheckout',
-    'as' => 'checkout'
+    'as' => 'checkout',
+    'middleware' => 'auth'
 ]);
 
 Route::get('/checkout', [
     'uses' => 'ProductController@getCheckout',
-    'as' => 'checkout'
+    'as' => 'checkout',
+    'middleware' => 'auth'
 ]);
 
 Route::get('/removeFromCart/{id}/{quantity}', [
