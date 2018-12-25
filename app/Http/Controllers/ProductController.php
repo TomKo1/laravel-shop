@@ -108,11 +108,12 @@ class ProductController extends Controller
            // return view();
            // do something
         }
-
+        $cart = Session::get('cart');
         Stripe::setApikey($secretKey);
         // Token is created using Checkout or Elements!
-// Get the payment token ID submitted by the form:
-// $token = $_POST['stripeToken'];
+        // Get the payment token ID submitted by the form:
+        // $token = $_POST['stripeToken'];
+        error_log($request->input('stripeToken'));
         try {
             Charge::create(array(
                 "amount" => $cart->totalPrice * 100,
