@@ -69,10 +69,9 @@ class UserController extends Controller
     public function getProfile($id) {
         $user = User::where('id', $id)->first();
         $addresses = $user->addresses;
-        error_log('-------');
-        error_log(get_class($addresses));
-        error_log('-------');
-        return view('user.profile')->with('user', $user)->with('addresses', $addresses);
+        $orders = $user->orders;
+
+        return view('user.profile')->with('user', $user)->with('addresses', $addresses)->with('orders', $orders);
     }
 
     public function getLogout() {

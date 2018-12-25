@@ -21,7 +21,7 @@
           <div id="card-errors" role="alert"></div>
           </div>
               {{ csrf_field() }}
-          <button>Submit Payment</button>
+          <button class="btn btn-success" >Submit Payment</button>
       </form>
 @endsection
 

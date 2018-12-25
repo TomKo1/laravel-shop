@@ -1,56 +1,7 @@
-// //Stripe.setPublishableKey('pk_test_7Fftps5esv8GZmxgRqHg566q');
-// var stripe = Stripe('pk_test_7Fftps5esv8GZmxgRqHg566q');
-
-// var form = $('#checkout-form');
-
-// form.submit(function(event) {
-//   $('#charge-error').addClass('hidden');
-
-//   var elements = stripe.elements();
-//   // card.mount('#card-element');
-
-//   var card = elements.create('card', {
-//     cardNumber: $('#card-number').val(),
-//     cardCvc: $('#card-cvc').val(),
-//     cardExpiry: $('#card-expiry-month').val() + '/' + $('#card-expiry-year').val()
-//   });
-
-//   var promise = stripe.createToken(card);
-
-//   promise.then(function(result){
-//     console.log('  serdecznie');
-
-//       if(response.error) {
-//         console.log( 'bardzo ');
-
-//         $('#charege-error').removeClass('hidden');
-//         $('#charge-error').text(response.error.message);
-//         form.find('button').prop('disabled', true);
-//       } else {
-//          // Get the token ID:
-//          var token = response.id;
-
-//          console.log('zegnam');
-
-//          // Insert the token into the form so it gets submitted to the server:
-//          form.append($('<input type="hidden" name="stripeToken" />').val(token));
-
-//          // Submit the form:
-//          form.get(0).submit();
-//       }
-//   });
-
-//   return false;
-// });
-
-// Create a Stripe client.
 var stripe = Stripe('pk_test_7Fftps5esv8GZmxgRqHg566q');
 
-// Create an instance of Elements.
 var elements = stripe.elements();
 
-// Custom styling can be passed to options when creating an Element.
-// (Note that this demo uses a wider set of styles than the guide below.)
 var style = {
   base: {
     color: '#32325d',
@@ -68,10 +19,8 @@ var style = {
   }
 };
 
-// Create an instance of the card Element.
 var card = elements.create('card', {style: style});
 
-// Add an instance of the card Element into the `card-element` <div>.
 card.mount('#card-element');
 
 // Handle real-time validation errors from the card Element.
@@ -86,6 +35,7 @@ card.addEventListener('change', function(event) {
 
 // Handle form submission.
 var form = document.getElementById('payment-form');
+
 form.addEventListener('submit', function(event) {
   event.preventDefault();
 
@@ -114,45 +64,3 @@ function stripeTokenHandler(token) {
   // Submit the form
   form.submit();
 }
-
-
-
-
-// form.submit(function(event){
-//   console.log('witam bardzo serdecznie');
-
-//   $('#charge-error').addClass('hidden');
-//   form.find('button').prop('disabled', true);
-//   Stripe.card.createToken({
-//     number: $('#card-number').val(),
-//     cvc: $('#card-cvc').val(),
-//     exp_month: $('#card-expiry-month').val(),
-//     exp_year: $('#card-expiry-year').val(),
-//     name: $('#card-name').val()
-//   }, stripeResponseHandler);
-
-//   return false;
-// });
-
-// function stripeResponseHandler(status, response) {
-//   console.log('  serdecznie');
-
-//   if(response.error) {
-//     console.log( 'bardzo ');
-
-//     $('#charege-error').removeClass('hidden');
-//     $('#charge-error').text(response.error.message);
-//     form.find('button').prop('disabled', true);
-//   } else {
-//      // Get the token ID:
-//      var token = response.id;
-
-//      console.log('zegnam');
-
-//      // Insert the token into the form so it gets submitted to the server:
-//      form.append($('<input type="hidden" name="stripeToken" />').val(token));
-
-//      // Submit the form:
-//      form.get(0).submit();
-//   }
-// }

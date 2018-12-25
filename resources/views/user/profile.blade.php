@@ -14,4 +14,19 @@
   @endforeach
   <br>
   <a href="{{ route('user.logout') }}">Logout</a>
+
+  <hr>
+  <h2>Yout orders:</h2>
+  <hr>
+
+  @foreach($orders as $order)
+    <hr>
+    {{ $order->name }}
+    <br>
+    {{ $order->address }}
+    <br>
+    {{ $order->cart }}
+    <hr>
+  @endforeach
+
 @endsection

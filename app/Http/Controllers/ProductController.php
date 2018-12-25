@@ -9,6 +9,8 @@ use Auth;
 use Session;
 use Stripe\Stripe;
 use Stripe\Charge;
+use App\Order;
+
 
 class ProductController extends Controller
 {
@@ -110,20 +112,34 @@ class ProductController extends Controller
         }
         $cart = Session::get('cart');
         Stripe::setApikey($secretKey);
-        // Token is created using Checkout or Elements!
-        // Get the payment token ID submitted by the form:
-        // $token = $_POST['stripeToken'];
-        error_log($request->input('stripeToken'));
+
         try {
-            Charge::create(array(
+            $charge = Charge::create(array(
                 "amount" => $cart->totalPrice * 100,
                 "currency" => "usd",
                 "source" => $request->input('stripeToken'),
                 "description"=>"Test Charge"
             ));
+
+        // get current user
+        $current_user = Auth::user();
+
+        // save the order
+        $order = new Order([
+            'address' => 'CHANGE ME: Sample address',
+            'name' => $current_user->email,
+            'payment_id' => $charge->id,
+            'cart' => serialize($cart)
+        ]);
+
+        $current_user->orders()->save($order);
+
         } catch (\Exception $e) {
+            error_log($e);
             return redirect()->route('checkout')->with('error', $e->getMessage());
         }
+
+
 
         Session::forget('cart');
 
