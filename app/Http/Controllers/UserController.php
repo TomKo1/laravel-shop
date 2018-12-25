@@ -48,7 +48,7 @@ class UserController extends Controller
         if(Session::has('oldUrl')) {
             $oldUrl = Session::get('oldUrl');
             Session::forget('oldUrl');
-            return redrect()->route($oldUrl);
+            return redrect($oldUrl);
         }
 
         return redirect('/');
@@ -69,7 +69,8 @@ class UserController extends Controller
             if(Session::has('oldUrl')) {
                 $oldUrl = Session::get('oldUrl');
                 Session::forget('oldUrl');
-                return redrect()->route($oldUrl);
+                error_log('Idzie redirect!');
+                return redirect($oldUrl);
             }
             return redirect()->route('user.profile', ['id' => Auth::user()->id]);
         }

@@ -22,17 +22,16 @@
         </ul>
     </div>
 
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        <ul class="navbar-nav ml-auto">
-            <li>
-                <a href={{ route('product.shoppingCart') }} class="btn nav-link bg-dark" role="button">
-                    Cart
-                    <span class="badge badge-danger">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-        </ul>
-    </div>
+    @if(Auth::check())
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <a href={{ route('product.shoppingCart') }} class="btn nav-link bg-dark" role="button">
+                        Cart
+                        <span class="badge badge-danger">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    @endif
 </nav>

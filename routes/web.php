@@ -17,32 +17,36 @@ Route::get('/', [
     'as' => 'product.index'
 ]);
 
-Route::get('/add-to-cart/{id}', [
-    'uses' => 'ProductController@getAddToCart',
-    'as' => 'product.addToCart'
-]);
 
-Route::post('/checkout', [
-    'uses' => 'ProductController@postCheckout',
-    'as' => 'checkout',
-    'middleware' => 'auth'
-]);
+Route::group(['middleware' => 'auth'], function() {
 
-Route::get('/checkout', [
-    'uses' => 'ProductController@getCheckout',
-    'as' => 'checkout',
-    'middleware' => 'auth'
-]);
+    Route::get('/add-to-cart/{id}', [
+        'uses' => 'ProductController@getAddToCart',
+        'as' => 'product.addToCart'
+    ]);
 
-Route::get('/removeFromCart/{id}/{quantity}', [
-    'uses' => 'ProductController@removeFromCart',
-    'as' => 'product.removeFromCart'
-]);
+    Route::post('/checkout', [
+        'uses' => 'ProductController@postCheckout',
+        'as' => 'checkout'
+    ]);
 
-Route::get('/shoppingCart', [
-    'uses' => 'ProductController@getShoppingCart',
-    'as' => 'product.shoppingCart'
-]);
+    Route::get('/checkout', [
+        'uses' => 'ProductController@getCheckout',
+        'as' => 'checkout'
+    ]);
+
+    Route::get('/removeFromCart/{id}/{quantity}', [
+        'uses' => 'ProductController@removeFromCart',
+        'as' => 'product.removeFromCart'
+    ]);
+
+    Route::get('/shoppingCart', [
+        'uses' => 'ProductController@getShoppingCart',
+        'as' => 'product.shoppingCart'
+    ]);
+
+});
+
 
 Route::group(['prefix' => 'product'], function() {
 
