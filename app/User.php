@@ -22,6 +22,10 @@ class User extends Model implements
     // use Notifiable;
     use Authenticatable, Authorizable, CanResetPassword;
 
+    const ADMIN_TYPE = 'admin';
+    const DEFAULT_TYPE = 'default';
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -39,6 +43,13 @@ class User extends Model implements
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * checks if user is admin
+     */
+    public function isAdmin() {
+        return $this->type == self::ADMIN_TYPE;
+    }
 
     /**
      * has_many relation to adresses - user can have many adresses
