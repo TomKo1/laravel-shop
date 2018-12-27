@@ -20,18 +20,15 @@
           <label for="password">Password</label>
           <input type="password" id="password" name="password" class="form-control">
         </div>
-        <div class="form-group">
-          <label for="street">Street</label>
-          <input type="street" id="street" name="street" class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="city">City</label>
-          <input type="city" id="city" name="city" class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="zip_code">Zip code</label>
-          <input type="zip_code" id="zip_code" name="zip_code" class="form-control">
-        </div>
+        <h2>Addresses:</h2>
+        <table class="table table-bordered" id="dynamic_field">
+            <tr>
+                <td><input type="text" name="street[]" placeholder="Street" class="form-control name_street" /></td>
+                <td><input type="text" name="city[]" placeholder="City Name" class="form-control name_city" /></td>
+                <td><input type="text" name="zip[]" placeholder="Zip Code" class="form-control zip_code" /></td>
+                <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
+            </tr>
+        </table>
 
         <button type="submit" class="btn btn-primary">Sign up</button>
         {{ csrf_field() }}
@@ -40,4 +37,9 @@
     </div>
 
   </div>
+@endsection
+
+
+@section('scripts')
+  <script type="text/javascript" src="{{ URL::to('js/dynamic_field.js') }}"></script>
 @endsection

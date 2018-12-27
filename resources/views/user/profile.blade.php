@@ -29,4 +29,17 @@
     <hr>
   @endforeach
 
+  <hr>
+  <h2>Addresses</h2>
+  <hr>
+  @foreach ( $addresses as $address)
+    <hr><br>
+      {{ $address->street }}
+      <br>
+      {{ $address->zip_code }}
+      <br>
+      {{ $address->city }}
+    <hr>
+  @endforeach
+
 @endsection
