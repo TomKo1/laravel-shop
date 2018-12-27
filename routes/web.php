@@ -50,7 +50,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 Route::group(['prefix' => 'product'], function() {
 
-    Route::group(['middleware' => 'auth'], function() {
+    Route::group(['middleware' => 'is_admin'], function() {
 
         Route::get('/newproduct', [
             'uses' => 'ProductController@newProduct',
