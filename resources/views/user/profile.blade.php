@@ -16,18 +16,11 @@
   <a href="{{ route('user.logout') }}">Logout</a>
 
   <hr>
-  <h2>Yout orders:</h2>
+  <h2>Your orders:</h2>
   <hr>
 
-  @foreach($orders as $order)
-    <hr>
-    {{ $order->name }}
-    <br>
-    {{ $order->address }}
-    <br>
-    {{ $order->cart }}
-    <hr>
-  @endforeach
+  @include('partials.order', $orders)
+
 
   <hr>
   <h2>Addresses</h2>

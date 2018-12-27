@@ -81,10 +81,16 @@ class UserController extends Controller
         return redirect('/');
     }
 
+    // TODO: extract the unserialization to model
     public function getProfile($id) {
         $user = User::where('id', $id)->first();
         $addresses = $user->addresses;
         $orders = $user->orders;
+        // unserialzie serialized cart
+        $orders->transform(function($order, $key) {
+            $order->cart = unserialize($order->cart);
+            return $order;
+        });
 
         return view('user.profile')->with('user', $user)->with('addresses', $addresses)->with('orders', $orders);
     }

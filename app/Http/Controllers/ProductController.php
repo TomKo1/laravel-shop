@@ -66,7 +66,6 @@ class ProductController extends Controller
     }
 
     public function getAddToCart(Request $request, $id) {
-        error_log('witam');
         $product = Product::find($id);
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
