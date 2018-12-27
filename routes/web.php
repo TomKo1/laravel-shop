@@ -18,6 +18,13 @@ Route::get('/', [
 ]);
 
 
+Route::get('/orders', [
+    'uses' => 'OrderController@getOrders',
+    'as' => 'order.index',
+    'middleware' => 'is_admin'
+]);
+
+
 Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/add-to-cart/{id}', [

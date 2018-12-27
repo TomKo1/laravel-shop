@@ -2,7 +2,7 @@
 @section('content')
   <div class="row">
     <div class="col-md-4 col-md-offset-4">
-      <h1>Sign in</h2>
+      <h1>Create new product</h2>
       @if(count($errors) > 0)
       <div class="alert alert-danger">
       @foreach($errors->all() as $error)
@@ -37,7 +37,7 @@
             <input required type="file" class="form-control" name="images[]" placeholder="address" multiple>
          </div>
 
-        <button type="submit" class="btn btn-primary">Sign up</button>
+        <button type="submit" class="btn btn-primary">Create</button>
         {{ csrf_field() }}
       </form>
     </div>
