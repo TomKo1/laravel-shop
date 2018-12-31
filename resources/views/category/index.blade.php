@@ -12,7 +12,7 @@
       Image:
       <li><img src={{ asset("storage/$category->image") }} /></li>
       Products from this category:
-      <li></li>
+      <li><a href={{ route('category.products', ['id' => $category->id] ) }}>Products from this category</a></li>
     </ul>
     <hr>
   @endforeach

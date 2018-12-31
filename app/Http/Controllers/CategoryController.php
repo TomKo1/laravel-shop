@@ -64,4 +64,10 @@ class CategoryController extends Controller
     }
 
 
+    public function getProducts(Request $request, $id) {
+        $category = Category::find($id);
+        return view('category.products', ['category' => $category, 'products' => $category->products]);
+    }
+
+
 }

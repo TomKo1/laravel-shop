@@ -42,6 +42,11 @@ Route::group(['middleware' => 'is_admin'], function() {
 
 });
 
+Route::get('/category/get-products/{id}', [
+    'uses' => 'CategoryController@getProducts',
+    'as' => 'category.products'
+]);
+
 
 Route::group(['middleware' => 'auth'], function() {
 
