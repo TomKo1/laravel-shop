@@ -30,7 +30,7 @@ class AddUserForeignKey extends Migration
     {
         Schema::table('addresses', function (Blueprint $table)
         {
-            $table->dropForeign('addresses_id_foreign');
+            $table->dropForeign('addresses_user_id_foreign');
             $table->dropIndex('addresses_user_id_index');
             $table->dropColumn('user_id');
         });

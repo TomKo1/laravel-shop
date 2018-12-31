@@ -20,6 +20,13 @@
           <!-- Used to display form errors. -->
           <div id="card-errors" role="alert"></div>
           </div>
+          <div class="form-row">
+            <select id="address" name="address">
+              @foreach ($addresses as $address)
+                <option value={{ $address->id }}>{{ $address->street }}</option>
+              @endforeach
+            </select>
+          </div>
               {{ csrf_field() }}
           <button class="btn btn-success" >Submit Payment</button>
       </form>

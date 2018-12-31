@@ -32,4 +32,12 @@ class Product extends Model
     protected $hidden = [
         'name', 'description', 'price', 'brand', 'quantity', 'images'
     ];
+
+
+    /**
+     * many to many relation product with category
+     */
+    public function categories() {
+        return $this->belongsToMany('App\Category');
+    }
 }

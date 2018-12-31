@@ -112,22 +112,27 @@ class ProductController extends Controller
         }
         $cart = Session::get('cart');
         Stripe::setApikey($secretKey);
-
+        // get current user
+        $current_user = Auth::user();
+        $order_number = now()->timestamp;
+        $order_description = 'Payment from: '.$current_user->email.' for order: '.$order_number;
         try {
             $charge = Charge::create(array(
                 "amount" => $cart->totalPrice * 100,
                 "currency" => "usd",
                 "source" => $request->input('stripeToken'),
-                "description"=>"Test Charge"
+                "description"=> $order_description
             ));
 
-        // get current user
-        $current_user = Auth::user();
 
-        // save the order
+        $delivery_address = Address::get($request->input('address'));
+        error_log('------');
+        error_log($delivery_address);
+        error_log('-------');
+        // $request->input('address')
         $order = new Order([
             'address' => 'CHANGE ME: Sample address',
-            'name' => $current_user->email,
+            'name' => $order_description,
             'payment_id' => $charge->id,
             'cart' => serialize($cart)
         ]);
@@ -150,11 +155,12 @@ class ProductController extends Controller
         if(!Session::has('cart')) {
             return view('shop.shopping-cart');
         }
-
+        $current_user = Auth::user();
         $oldCart = Session::get('cart');
+        $addresses = $current_user->addresses;
         $cart = new Cart($oldCart);
         $totalPrice = $cart->totalPrice;
-        return view('shop.checkout', ['totalPrice' => $totalPrice]);
+        return view('shop.checkout', ['totalPrice' => $totalPrice, 'addresses' => $addresses]);
     }
 
 }
