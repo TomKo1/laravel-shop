@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Category;
 use App\Cart;
 use Illuminate\Http\Request;
 use Auth;
@@ -22,7 +23,8 @@ class ProductController extends Controller
 
 
     public function newProduct() {
-        return view('product.new');
+        $categories = Category::all();
+        return view('product.new', ['categories' => $categories]);
     }
 
     public function createProduct(Request $request) {
@@ -40,6 +42,7 @@ class ProductController extends Controller
         [
             'images.*' => 'Images be in png / jpeg / gif / jpg format and have up to 2 MB'
         ]);
+
 
         $files = $request->file('images');
         $filePathsArray = [];
@@ -61,6 +64,9 @@ class ProductController extends Controller
         ]);
 
         $product->save();
+
+        $product->categories()->attach($request->input('categories'));
+
 
         return redirect('/');
     }
@@ -126,10 +132,7 @@ class ProductController extends Controller
 
 
         $delivery_address = Address::get($request->input('address'));
-        error_log('------');
-        error_log($delivery_address);
-        error_log('-------');
-        // $request->input('address')
+
         $order = new Order([
             'address' => 'CHANGE ME: Sample address',
             'name' => $order_description,

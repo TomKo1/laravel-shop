@@ -39,7 +39,6 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        error_log('witam');
 
         //'image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
         $this->validate($request, [

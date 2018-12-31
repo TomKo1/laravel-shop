@@ -11,6 +11,8 @@
       <li>{{ $category->description }}</li>
       Image:
       <li><img src={{ asset("storage/$category->image") }} /></li>
+      Products from this category:
+      <li></li>
     </ul>
     <hr>
   @endforeach

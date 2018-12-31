@@ -32,6 +32,13 @@
           <input type="number" min="1" max="1000000" id="quantity" name="quantity" class="form-control">
         </div>
 
+       <h2>Categories:</h2>
+        <select id="categories" name="categories[]" multiple>
+            @foreach ($categories as $category)
+              <option value={{ $category->id }}>{{ $category->name }}</option>
+            @endforeach
+        </select>
+
         <div class="form-group">
             <label for="image">Image</label>
             <input required type="file" class="form-control" name="images[]" placeholder="address" multiple>

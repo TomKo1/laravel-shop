@@ -38,7 +38,6 @@ class UserController extends Controller
         $no_elements = count($streets);
 
         for ($i = 0; $i < $no_elements; ++$i) {
-            error_log($streets[$i].' '.$cities[$i].' '.$zip_codes[$i]);
             $address = new Address([
                 'street' => $streets[$i],
                 'city' => $cities[$i],
@@ -72,7 +71,6 @@ class UserController extends Controller
             if(Session::has('oldUrl')) {
                 $oldUrl = Session::get('oldUrl');
                 Session::forget('oldUrl');
-                error_log('Idzie redirect!');
                 return redirect($oldUrl);
             }
             return redirect()->route('user.profile', ['id' => Auth::user()->id]);
