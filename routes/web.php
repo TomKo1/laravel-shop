@@ -17,12 +17,30 @@ Route::get('/', [
     'as' => 'product.index'
 ]);
 
-
-Route::get('/orders', [
-    'uses' => 'OrderController@getOrders',
-    'as' => 'order.index',
-    'middleware' => 'is_admin'
+Route::get('/categories', [
+    'uses' => 'CategoryController@index',
+    'as' => 'category.index'
 ]);
+
+
+Route::group(['middleware' => 'is_admin'], function() {
+
+    Route::get('/orders', [
+        'uses' => 'OrderController@getOrders',
+        'as' => 'order.index'
+    ]);
+
+    Route::get('/create-category',[
+        'uses' => 'CategoryController@create',
+        'as' => 'category.create'
+    ]);
+
+    Route::post('/create-category', [
+        'uses' => 'CategoryController@store',
+        'as' => 'category.store'
+    ]);
+
+});
 
 
 Route::group(['middleware' => 'auth'], function() {
