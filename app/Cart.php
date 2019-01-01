@@ -19,6 +19,10 @@ class Cart
 
   public function add($item, $id) {
     $storedItem = ['qty' => 0, 'price' => $item->price, 'item' => $item];
+    // update in DB
+    $item->quantity -= 1;
+    $item->save();
+
     if($this->items) {
       if(array_key_exists($id, $this->items)) {
         $storedItem = $this->items[$id];
@@ -42,12 +46,21 @@ class Cart
         $this->totalPrice -= $itemToRemove['price'];
         $this->totalQty -= $itemToRemove['qty'];
         unset($this->items[$id]);
+
+        // update in DB
+        $item->quantity += $itemToRemove['qty'];
+        $item->save();
+
       } else {
         $this->totalPrice -= $item->price * $quantity;
         $this->totalQty -= $quantity;
         $itemToRemove['qty'] -= $quantity;
         $itemToRemove['price'] -= $item->price * $quantity;
         $this->items[$id] = $itemToRemove;
+
+        // update in DB
+        $item->quantity += $quantity;
+        $item->save();
       }
     }
   }

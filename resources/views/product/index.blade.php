@@ -39,7 +39,7 @@
                   <div class="product-content">
                       <h3 class="title"><a href="#">{{ $product->name }}</a></h3>
                       <div class="price">
-                        ${{ $product->price }}
+                        ${{ $product->price }} | {{ $product->quantity }} left
                       </div>
                       <a class="add-to-cart" href={{ route('product.addToCart', ['id' => $product->id]) }} role="button">+ Dodaj do koszyka</a>
                       @if(Auth::check())
