@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class CategoryController extends Controller
 {
@@ -50,7 +51,10 @@ class CategoryController extends Controller
 
         $file = $request->file('image');
         $filename = now()->timestamp.$file->getClientOriginalName();
-        $file->storeAs('public', $filename);
+
+        $image_resize = Image::make($file->getRealPath());
+        $image_resize->resize(300, 300);
+        $image_resize->save(public_path('storage/' .$filename));
 
         $category = new Category([
             'name' =>   $request->input('name'),

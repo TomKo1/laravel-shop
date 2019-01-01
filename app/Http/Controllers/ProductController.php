@@ -55,8 +55,6 @@ class ProductController extends Controller
             $image_resize = Image::make($file->getRealPath());
             $image_resize->resize(300, 300);
             $image_resize->save(public_path('storage/' .$filename));
-
-            // $image_resize->storeAs('public', $filename);
             array_push($filePathsArray, $filename);
         }
 
