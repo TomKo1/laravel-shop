@@ -4,11 +4,13 @@
 @endsection
 
 @section('content')
-  <div class="row">
-    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
-      <h1>Checkout</h1>
-      <h4>Your total: ${{ $totalPrice }}</h4>
-      <form action={{ route('checkout') }} method="post" id="payment-form">
+
+<div class="card  mb-3 mt-3" >
+  <div class="card-header text-center">Checkout</div>
+  <div class="card-body">
+    <h5 class="card-title">Total: ${{ $totalPrice }}</h5>
+    <div class="card-text">
+        <form action={{ route('checkout') }} method="post" id="payment-form">
         <div class="form-row">
           <label for="card-element">
             Credit or debit card
@@ -20,16 +22,20 @@
           <!-- Used to display form errors. -->
           <div id="card-errors" role="alert"></div>
           </div>
-          <div class="form-row">
-            <select id="address" name="address">
+          <div class="form-row mt-3 mb-3">
+            <label for="address">Address of delivery</label>
+            <select id="address" name="address" class="form-control">
               @foreach ($addresses as $address)
                 <option value={{ $address->id }}>{{ $address->street }}</option>
               @endforeach
             </select>
           </div>
               {{ csrf_field() }}
-          <button class="btn btn-success" >Submit Payment</button>
+          <button class="btn btn-success form-control" >Submit Payment</button>
       </form>
+    </div>
+  </div>
+</div>
 @endsection
 
 @section('scripts')
