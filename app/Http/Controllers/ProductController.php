@@ -12,6 +12,7 @@ use Stripe\Stripe;
 use Stripe\Charge;
 use App\Order;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProductController extends Controller
@@ -169,6 +170,18 @@ class ProductController extends Controller
         $cart = new Cart($oldCart);
         $totalPrice = $cart->totalPrice;
         return view('shop.checkout', ['totalPrice' => $totalPrice, 'addresses' => $addresses]);
+    }
+
+    public function destroy($id) {
+        $product = Product::findOrFail($id);
+        // deleta associated images from storage
+        foreach($product->images as $image) {
+            Storage::delete('public/'.$image);
+        }
+
+        $product->delete();
+
+        return redirect('/');
     }
 
 }

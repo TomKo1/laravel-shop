@@ -82,6 +82,11 @@ Route::group(['prefix' => 'product'], function() {
 
     Route::group(['middleware' => 'is_admin'], function() {
 
+        Route::delete('/{id}', [
+            'uses' => 'ProductController@destroy',
+            'as' => 'product.destroy'
+        ]);
+
         Route::get('/newproduct', [
             'uses' => 'ProductController@newProduct',
             'as' => 'product.new'

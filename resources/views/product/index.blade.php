@@ -42,6 +42,15 @@
                         ${{ $product->price }}
                       </div>
                       <a class="add-to-cart" href={{ route('product.addToCart', ['id' => $product->id]) }} role="button">+ Dodaj do koszyka</a>
+                      @if(Auth::check())
+                        @if(Auth::user()->isAdmin())
+                            <form action={{ route('product.destroy', ['id' => $product->id]) }} method="POST">
+                                @method('DELETE')
+                                @csrf
+                              <button type="submit" class="btn btn-danger">Delete this product</button>
+                            </form>
+                        @endif
+                      @endif
                   </div>
               </div>
           </div>
