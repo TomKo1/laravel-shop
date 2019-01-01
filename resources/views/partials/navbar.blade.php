@@ -7,6 +7,19 @@
             <li class="nav-item">
                 <a class="nav-link" href={{ route('category.index') }}>Categories</a>
             </li>
+            @if(Auth::check())
+                @if(Auth::user()->isAdmin())
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin options
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Create new product</a>
+                                <a class="dropdown-item" href="#">Create new category</a>
+                            </div>
+                        </li>
+                @endif
+            @endif
         </ul>
     </div>
 

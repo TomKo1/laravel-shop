@@ -17,6 +17,8 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin123'),
             'type' => User::ADMIN_TYPE,
+            'name' => 'Tomek',
+            'surname' => 'Kot',
         ]);
 
         // default user account
@@ -24,6 +26,8 @@ class UsersTableSeeder extends Seeder
             'email' => 'user@gmail.com',
             'password' => bcrypt('user123'),
             'type' => User::DEFAULT_TYPE,
+            'name' => 'Tomek',
+            'surname' => 'Kot',
         ]);
     }
 }
