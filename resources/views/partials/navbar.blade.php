@@ -14,8 +14,8 @@
                             Admin options
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Create new product</a>
-                                <a class="dropdown-item" href="#">Create new category</a>
+                                <a class="dropdown-item" href={{ route('category.create') }}>Create new category</a>
+                                <a class="dropdown-item" href={{ route('product.new') }}>Create new product</a>
                             </div>
                         </li>
                 @endif
