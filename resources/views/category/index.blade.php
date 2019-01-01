@@ -19,6 +19,15 @@
               <div class="product-content">
               <h3 class="title"><a href="#">{{ $category->name }}</a></h3>
                 <a class="add-to-cart" href={{ route('category.products', ['id' => $category->id]) }} role="button">Zobacz produkty z tej kategorii</a>
+                 @if(Auth::check())
+                        @if(Auth::user()->isAdmin())
+                            <form action={{ route('category.destroy', ['id' => $category->id]) }} method="POST">
+                                @method('DELETE')
+                                @csrf
+                              <button type="submit" class="btn btn-danger">Delete this category</button>
+                            </form>
+                        @endif
+                      @endif
               </div>
             </div>
         </div>

@@ -40,6 +40,10 @@ Route::group(['middleware' => 'is_admin'], function() {
         'as' => 'category.store'
     ]);
 
+    Route::delete('/category/{id}', [
+        'uses' => 'CategoryController@destroy',
+        'as' => 'category.destroy'
+    ]);
 });
 
 Route::get('/category/get-products/{id}', [

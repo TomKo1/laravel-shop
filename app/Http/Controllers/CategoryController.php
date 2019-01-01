@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -73,5 +74,14 @@ class CategoryController extends Controller
         return view('category.products', ['category' => $category, 'products' => $category->products]);
     }
 
+
+    public function destroy($id) {
+        $category = Category::findOrFail($id);
+        // deleta associated images from storage
+        Storage::delete('public/'.$category->image);
+        $category->delete();
+
+        return redirect('/');
+    }
 
 }
