@@ -18,6 +18,8 @@ class UserController extends Controller
         $this->validate($request, [
             'email' => 'email|required|unique:users',
             'password' => 'required|min:6',
+            'name' => 'required',
+            'surname' => 'required',
             'city.*' => 'required|min:1',
             'zip.*' => 'required|min:1|regex:/^[0-9]{2}-[0-9]{3}?$/',
             'street.*' => 'required|min:1'
@@ -27,6 +29,8 @@ class UserController extends Controller
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             'type' => User::DEFAULT_TYPE,
+            'name' => $request->input('name'),
+            'surname' => $request->input('surname'),
         ]);
 
         $user->save();

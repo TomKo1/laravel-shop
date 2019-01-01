@@ -23,6 +23,7 @@ class ProductController extends Controller
     }
 
 
+
     public function newProduct() {
         $categories = Category::all();
         return view('product.new', ['categories' => $categories]);
