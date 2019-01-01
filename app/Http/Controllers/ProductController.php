@@ -11,6 +11,7 @@ use Session;
 use Stripe\Stripe;
 use Stripe\Charge;
 use App\Order;
+use Intervention\Image\ImageManagerStatic as Image;
 
 
 class ProductController extends Controller
@@ -50,7 +51,12 @@ class ProductController extends Controller
         // it is also possible to upload images to separate table
         foreach($files as $file) {
             $filename = now()->timestamp.$file->getClientOriginalName();
-            $file->storeAs('public', $filename);
+
+            $image_resize = Image::make($file->getRealPath());
+            $image_resize->resize(300, 300);
+            $image_resize->save(public_path('storage/' .$filename));
+
+            // $image_resize->storeAs('public', $filename);
             array_push($filePathsArray, $filename);
         }
 
