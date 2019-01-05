@@ -11,12 +11,7 @@
 	  			<div class="pl-3 pt-2 pr-2 pb-2 w-75 border-left">
 	  					<h4 class="text-primary">{{ $user->name }} {{ $user->surname }}</h4>
 	  					<h5 class="text-info">{{ $user->email }}</h5>
-	  					{{-- <ul class="m-0 float-left" style="list-style: none; margin:0; padding: 0">
-	  						<li><i class="fab fa-facebook-square"></i> Facebook</li>
-	  						<li><i class="fab fa-twitter-square"></i> Twitter</li> --}}
-	  					</ul>
-						{{-- <p class="text-right m-0"><a href="#" class="btn btn-primary"><i class="far fa-user"></i> View Profile</a></p> --}}
-				</div>
+	  		</div>
 			</div>
 		</div>
 

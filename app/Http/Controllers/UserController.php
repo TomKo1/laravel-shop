@@ -88,6 +88,7 @@ class UserController extends Controller
         $user = User::where('id', $id)->first();
         $addresses = $user->addresses;
         $orders = $user->orders;
+
         // unserialzie serialized cart
         $orders->transform(function($order, $key) {
             $order->cart = unserialize($order->cart);

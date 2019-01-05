@@ -139,7 +139,7 @@ Route::group(['prefix' => 'user'], function() {
     Route::get('/profile/{id}', [
         'uses' => 'UserController@getProfile',
         'as' => 'user.profile',
-        'middleware' => 'auth'
+        'middleware' => 'check_profile_auth'
     ]);
 
     Route::get('/logout', [
