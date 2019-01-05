@@ -32,7 +32,9 @@
                       </a>
                       <ul class="social">
                           <li><a href={{ route('product.show', ['id' => $product->id]) }} data-tip="Show this product"><i class="fa fa-shopping-cart"></i></a></li>
-                          <li><a href={{ route('product.addToCart', ['id' => $product->id]) }} data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                          @if(Auth::check() && !Auth::user()->isAdmin())
+                            <li><a href={{ route('product.addToCart', ['id' => $product->id]) }} data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                          @endif
                       </ul>
                   </div>
                   <div class="product-content">
@@ -40,8 +42,9 @@
                       <div class="price">
                         ${{ $product->price }} | {{ $product->quantity }} left
                       </div>
-                      <a class="add-to-cart" href={{ route('product.addToCart', ['id' => $product->id]) }} role="button">+ Dodaj do koszyka</a>
                       @if(Auth::check())
+                        @if(!Auth::user()->isAdmin()) <a class="add-to-cart" href={{ route('product.addToCart', ['id' => $product->id]) }} role="button">+ Dodaj do koszyka</a> @endif
+
                         @if(Auth::user()->isAdmin())
                             <form action={{ route('product.destroy', ['id' => $product->id]) }} method="POST">
                                 @method('DELETE')

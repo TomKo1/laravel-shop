@@ -52,7 +52,7 @@ Route::get('/category/get-products/{id}', [
 ]);
 
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth_not_admin'], function() {
 
     Route::get('/add-to-cart/{id}', [
         'uses' => 'ProductController@getAddToCart',

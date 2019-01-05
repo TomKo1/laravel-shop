@@ -47,10 +47,12 @@
               <th scope="row">Price</th>
               <td>{{ $product->price }}$</td>
             </tr>
-            <tr>
-              <th></th>
-              <td><a href={{ route('product.addToCart', ['id' => $product->id]) }}  role="button" class="btn btn-success" > Add to cart </a></td>
-            </tr>
+            @if(Auth::check() && !Auth::user()->isAdmin())
+              <tr>
+                <th></th>
+                <td><a href={{ route('product.addToCart', ['id' => $product->id]) }}  role="button" class="btn btn-success" > Add to cart </a></td>
+              </tr>
+            @endif
           </tbody>
         </table>
       </div>

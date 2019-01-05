@@ -26,12 +26,14 @@
     @if(Auth::check())
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
             <ul class="navbar-nav ml-auto">
-                <li>
-                    <a href={{ route('product.shoppingCart') }} class="btn nav-link bg-dark" role="button">
-                        Cart
-                        <span class="badge badge-danger">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
-                    </a>
-                </li>
+                @if(!Auth::user()->isAdmin())
+                    <li>
+                        <a href={{ route('product.shoppingCart') }} class="btn nav-link bg-dark" role="button">
+                            Cart
+                            <span class="badge badge-danger">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
+                        </a>
+                    </li>
+                @endif
                 <li>
                     <a class="btn nav-link bg-dark" role="button" href="{{ route('user.profile', [ 'id' => Auth::user()->id ]) }}">Profile</a>
                 </li>
