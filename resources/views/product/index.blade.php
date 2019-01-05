@@ -22,17 +22,16 @@
           <div class="col-md-3 col-sm-6">
               <div class="product-grid">
                   <div class="product-image">
-                      <a href="#">
-                        @foreach($product->images as $path)
-                          <img class="pic-1" src="{{ asset("storage/$path") }}" >
-                        @endforeach
+                      <a href={{ route('product.show', ['id' => $product->id]) }}>
+                          <img class="pic-1" src="{{ asset("storage/".$product->images[0]) }}" >
 
-                        @foreach($product->images as $path)
-                          <img class="pic-2" src="{{ asset("storage/$path") }}" >
-                        @endforeach
+
+                          <img class="pic-2" src="{{ asset("storage/".$product->images[1]) }}" >
+
 
                       </a>
                       <ul class="social">
+                          <li><a href={{ route('product.show', ['id' => $product->id]) }} data-tip="Show this product"><i class="fa fa-shopping-cart"></i></a></li>
                           <li><a href={{ route('product.addToCart', ['id' => $product->id]) }} data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
                       </ul>
                   </div>

@@ -102,6 +102,11 @@ Route::group(['prefix' => 'product'], function() {
         ]);
 
     });
+
+    Route::get('/{id}', [
+        'uses' => 'ProductController@getProduct',
+        'as' => 'product.show'
+    ]);
 });
 
 

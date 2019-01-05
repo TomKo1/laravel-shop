@@ -39,11 +39,11 @@ class ProductController extends Controller
             'price' => 'required|numeric|between:0.01,1000000',
             'brand' => 'max:50',
             'quantity' => 'required|numeric|between:1,1000000',
-            'images' => 'required',
+            'images' => 'required|min:2',
             'images.*' => 'image|mimes:png,jpeg,gif,jpg|max:2048'
         ],
         [
-            'images.*' => 'Images be in png / jpeg / gif / jpg format and have up to 2 MB'
+            'images.*' => 'Upload at least 2 images of size up to 2 MB in format png / jpeg / gif / jpg'
         ]);
 
 
@@ -111,6 +111,12 @@ class ProductController extends Controller
 
         return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
+
+    public function getProduct($id) {
+        $product = Product::find($id);
+        return view('product.show', ['product' => $product]);
+    }
+
 
     public function postCheckout(Request $request) {
         if(!Session::has('cart')) {
