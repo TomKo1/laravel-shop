@@ -14,13 +14,9 @@
               <div class="product-grid">
                   <div class="product-image">
                       <a href="#">
-                        @foreach($product->images as $path)
-                          <img class="pic-1" src="{{ asset("storage/$path") }}" >
-                        @endforeach
+                          <img class="pic-1" src="{{ asset('storage/'.$product->images[0]) }}" >
 
-                        @foreach($product->images as $path)
-                          <img class="pic-2" src="{{ asset("storage/$path") }}" >
-                        @endforeach
+                          <img class="pic-2" src="{{ asset('storage/'.$product->images[1]) }}" >
 
                       </a>
                       <ul class="social">

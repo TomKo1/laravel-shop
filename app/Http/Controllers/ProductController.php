@@ -13,6 +13,7 @@ use Stripe\Charge;
 use App\Order;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 
 class ProductController extends Controller
@@ -20,6 +21,7 @@ class ProductController extends Controller
 
     public function getProducts() {
         $products = Product::all();
+        $product_newest = DB::table('products')->orderBy('updated_at', 'desc')->limit(5)->get();
         return view('product.index')->with('products', $products);
     }
 
