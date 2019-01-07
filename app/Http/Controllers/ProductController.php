@@ -21,7 +21,6 @@ class ProductController extends Controller
 
     //TODO: not particularly good solution with categories
     public function getProducts() {
-        // $products = Product::all();
         $product_newest = DB::table('products')->orderBy('updated_at', 'desc')->limit(6)->get()->toArray();
         $categories = Category::all();
         return view('product.index', ['newest_products' => $product_newest, 'categories' => $categories]);

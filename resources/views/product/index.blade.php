@@ -93,7 +93,8 @@
 														<h4 class="product-price">${{ $product->price }}</h4>
 													</div>
 													<div class="add-to-cart">
-														<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+														{{-- fa-shopping-cart --}}
+															<a class="add-to-cart-btn" href={{ route('product.addToCart', ['id' => $product->id]) }} role="button"><i class="fa"></i> Add to cart</a>
 													</div>
 												</div>
 												<!-- /product -->
@@ -130,25 +131,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</li>
-							</ul>
+
 						</div>
 					</div>
 				</div>
