@@ -38,7 +38,7 @@
             </tr>
         </table>
 
-        <button type="submit" class="btn btn-primary">Sign up</button>
+        <button type="submit" class="primary-btn order-submit form-control" style="margin-bottom: 30px;">Sign up</button>
         {{ csrf_field() }}
       </form>
 
@@ -49,5 +49,6 @@
 
 
 @section('scripts')
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="{{ URL::to('js/dynamic_field.js') }}"></script>
 @endsection

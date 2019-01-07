@@ -12,21 +12,21 @@
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
 		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="{{ URL::to('css/bootstrap.min.css') }}">
 
 		<!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="css/slick.css"/>
-		<link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+		<link rel="stylesheet" href="{{ URL::to('css/slick.css') }}">
+		<link rel="stylesheet" href="{{ URL::to('css/slick-theme.css') }}">
 
 		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
+
+		<link rel="stylesheet" href="{{ URL::to('css/nouislider.css') }}">
 
 		<!-- Font Awesome Icon -->
-		<link rel="stylesheet" href="css/font-awesome.min.css">
 		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+		<link rel="stylesheet" href="{{ URL::to('css/style.css') }}">
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,6 +34,8 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
+
+		@yield('css')
 
     </head>
 	<body>
@@ -49,8 +51,8 @@
 					</ul>
 					<ul class="header-links pull-right">
 						@if(Auth::check())
-							<li><a href="{{ route('user.profile', [ 'id' => Auth::user()->id ]) }}"><i class="fa fa-dollar"></i>Profile</a></li>
-							<li><a href="{{ route('user.logout') }}"><i class="fa fa-dollar"></i>Log out</a></li>
+							<li><a href="{{ route('user.profile', [ 'id' => Auth::user()->id ]) }}">Profile</a></li>
+							<li><a href="{{ route('user.logout') }}">Log out</a></li>
 							@if(Auth::user()->isAdmin()))
 							<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,8 +65,8 @@
 								</li>
 							@endif
 						@else
-							<li><a href="{{ route('user.signin') }}"><i class="fa fa-dollar"></i>Sign in</a></li>
-							<li><a href="{{ route('user.signup') }}"><i class="fa fa-dollar"></i>Sign up</a></li>
+							<li><a href="{{ route('user.signin') }}">Sign in</a></li>
+							<li><a href="{{ route('user.signup') }}">Sign up</a></li>
 						@endif
 					</ul>
 				</div>
@@ -160,50 +162,9 @@
 								<h3 class="footer-title">About Us</h3>
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
 								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Categories</h3>
-								<ul class="footer-links">
-									<li><a href="#">Hot deals</a></li>
-									<li><a href="#">Laptops</a></li>
-									<li><a href="#">Smartphones</a></li>
-									<li><a href="#">Cameras</a></li>
-									<li><a href="#">Accessories</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="clearfix visible-xs"></div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Information</h3>
-								<ul class="footer-links">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Contact Us</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-									<li><a href="#">Orders and Returns</a></li>
-									<li><a href="#">Terms & Conditions</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Service</h3>
-								<ul class="footer-links">
-									<li><a href="#">My Account</a></li>
-									<li><a href="#">View Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Track My Order</a></li>
-									<li><a href="#">Help</a></li>
+									<li><a href="#"><i class="fa fa-map-marker"></i>Kwiatowa 9</a></li>
+									<li><a href="#"><i class="fa fa-phone"></i>+48 42 556 543 32</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>sample@gmail.com</a></li>
 								</ul>
 							</div>
 						</div>
@@ -230,7 +191,7 @@
 							</ul>
 							<span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</span>
 						</div>
@@ -250,6 +211,7 @@
 		<script src="js/nouislider.min.js"></script>
 		<script src="js/jquery.zoom.min.js"></script>
 		<script src="js/main.js"></script>
+		@yield('scripts')
 
 	</body>
 </html>

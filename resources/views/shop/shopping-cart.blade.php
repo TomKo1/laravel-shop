@@ -1,40 +1,59 @@
-
 @extends('layouts.master')
+
 @section('content')
-  @if(Session::has('cart'))
+  <!-- SECTION -->
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
     <div class="row">
-      <div class="col-sm-12 col-md-12 col-md-offset-3 col-sm-offset-3">
-        <ul class="list-group">
-          @foreach($products as $product)
-          <li class="list-group-item">
-              <span class="badge"> {{ $product['qty'] }} </span>
-              <strong>{{ $product['item']['name'] }}</storng>
-              <span class="label label-success"> {{ $product['price'] }} </span>
-              <div class="btn-group">
+
+      <div class="col">
+
+      <!-- Order Details -->
+      <div class="col order-details">
+        <div class="section-title text-center">
+          <h3 class="title">Your Order</h3>
+        </div>
+
+        <div class="order-summary">
+          <div class="order-col">
+            <div><strong>PRODUCT</strong></div>
+            <div><strong>TOTAL</strong></div>
+          </div>
+          <div class="order-products">
+            <div class="order-col">
+
+                @foreach($products as $product)
+                  <div> {{ $product['qty'] }} x {{ $product['item']['name'] }}</div>
+                  <div>
+                      <div class="btn-group">
                 <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                   <li><a href={{ route('product.removeFromCart', ['id' => $product['item']->id, 'quantity' => '1']) }}>Reduce by 1</a></li>
                   <li><a href={{ route('product.removeFromCart', ['id' => $product['item']->id, 'quantity' => $product['qty']]) }} >Remove all</a></li>
                 </ul>
               </div>
-            </li>
-          @endforeach
-        </ul>
-      </div>
-    </div>
+                  </div>
+                  <div>${{ $product['price'] }}</div>
+                @endforeach
 
-    <div class="row">
-      <div class="col-sm-12 col-md-12 col-md-offset-3 col-sm-offset-3 align-self-center">
-        <strong>Total: {{ $totalPrice }}</strong><br>
-        <a href={{ route('checkout') }} type="button" class="btn btn-success">Checkout</a>
+            </div>
+              </div>
+
+
+
+        <a  href={{ route('checkout') }} type="button" class="primary-btn order-submit">Checkout!</a>
       </div>
+      <!-- /Order Details -->
     </div>
-  @else
-    <div class="row">
-      <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-        <h2>No items in cart</h2>
-      </div>
-    </div>
-  @endif
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>
+</div>
+<!-- /SECTION -->
+
+
 
 @endsection

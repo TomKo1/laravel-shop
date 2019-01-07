@@ -97,7 +97,8 @@ class ProductController extends Controller
 
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+        $addresses = Auth::user()->addresses();
+        return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice, 'addresses' => $addresses]);
     }
 
     public function removeFromCart(Request $request, $id, $quantity) {

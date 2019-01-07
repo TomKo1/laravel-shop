@@ -256,6 +256,8 @@ textarea.input {
   transition: all 0.2s;
 }
 
+
+
 .input-radio input[type="radio"]:checked+label span, .input-checkbox input[type="checkbox"]:checked+label span {
   background-color: #D10024;
   border-color: #D10024;
