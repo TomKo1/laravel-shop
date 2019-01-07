@@ -21,12 +21,12 @@
           <input type="password" id="password" name="password" class="form-control">
         </div>
         <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" class="from-control">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control">
         </div>
         <div class="form-group">
-          <label for="surname">Surname</label>
-          <input type="text" id="surname" name="surname" class="from-control">
+            <label for="surname">Surname</label>
+            <input type="text" id="surname" name="surname" class="form-control">
         </div>
         <h2>Addresses:</h2>
         <table class="table table-bordered" id="dynamic_field">

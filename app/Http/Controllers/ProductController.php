@@ -116,9 +116,14 @@ class ProductController extends Controller
         return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
+    //TODO: related products
     public function getProduct($id) {
         $product = Product::find($id);
-        return view('product.show', ['product' => $product]);
+        $categories_names = $product->categories()->pluck('name');
+        // SELECT * FROM Categories Where id in (Select id from )
+        // $related_products = Category::where('id')
+        // Category::all->where('id' = )
+        return view('product.show', ['product' => $product, 'categories_names' => $categories_names]);
     }
 
 

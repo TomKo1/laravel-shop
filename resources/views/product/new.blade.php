@@ -44,7 +44,7 @@
             <input required type="file" class="form-control" name="images[]" placeholder="address" multiple>
          </div>
 
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="primary-btn order-submit form-control" style="margin-bottom: 10px;">Create</button>
         {{ csrf_field() }}
       </form>
     </div>
