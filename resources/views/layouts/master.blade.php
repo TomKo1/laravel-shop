@@ -23,6 +23,7 @@
 
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="css/style.css"/>
@@ -42,13 +43,29 @@
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+						<li><a href="#"><i class="fa fa-phone"></i> +48 42 556 543 342</a></li>
+						<li><a href="#"><i class="fa fa-envelope-o"></i> samplel@gmail.com</a></li>
+						<li><a href="#"><i class="fa fa-map-marker"></i> Kwiatowa 9</a></li>
 					</ul>
 					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-						<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+						@if(Auth::check())
+							<li><a href="{{ route('user.profile', [ 'id' => Auth::user()->id ]) }}"><i class="fa fa-dollar"></i>Profile</a></li>
+							<li><a href="{{ route('user.logout') }}"><i class="fa fa-dollar"></i>Log out</a></li>
+							@if(Auth::user()->isAdmin()))
+							<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Admin options
+									</a>
+									<div class="dropdown-menu" style="background: black;">
+										<a class="dropdown-item" href={{ route('category.create') }}>Create new category</a>
+										<a class="dropdown-item" href={{ route('product.new') }}>Create new product</a>
+									</div>
+								</li>
+							@endif
+						@else
+							<li><a href="{{ route('user.signin') }}"><i class="fa fa-dollar"></i>Sign in</a></li>
+							<li><a href="{{ route('user.signup') }}"><i class="fa fa-dollar"></i>Sign up</a></li>
+						@endif
 					</ul>
 				</div>
 			</div>
@@ -88,58 +105,50 @@
 			<!-- ACCOUNT -->
 			<div class="col-md-3 clearfix">
 				<div class="header-ctn">
-					<!-- Wishlist -->
-					<div>
-						<a href="#">
-							<i class="fa fa-heart-o"></i>
-							<span>Your Wishlist</span>
-							<div class="qty">2</div>
-						</a>
-					</div>
-					<!-- /Wishlist -->
+						@if(Auth::check() && !Auth::user()->isAdmin())
+						<!-- Cart -->
+						<div class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+								<i class="fa fa-shopping-cart"></i>
+								<span>Your Cart</span>
+								<div class="qty">0</div>
+							</a>
+							<div class="cart-dropdown">
+								<div class="cart-list">
+									<div class="product-widget">
+										<div class="product-img">
+											<img src="./img/product01.png" alt="">
+										</div>
+										<div class="product-body">
+											<h3 class="product-name"><a href="#">product name goes here</a></h3>
+											<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+										</div>
+										<button class="delete"><i class="fa fa-close"></i></button>
+									</div>
 
-					<!-- Cart -->
-					<div class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-							<i class="fa fa-shopping-cart"></i>
-							<span>Your Cart</span>
-							<div class="qty">3</div>
-						</a>
-						<div class="cart-dropdown">
-							<div class="cart-list">
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product01.png" alt="">
+									<div class="product-widget">
+										<div class="product-img">
+											<img src="./img/product02.png" alt="">
+										</div>
+										<div class="product-body">
+											<h3 class="product-name"><a href="#">product name goes here</a></h3>
+											<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
+										</div>
+										<button class="delete"><i class="fa fa-close"></i></button>
 									</div>
-									<div class="product-body">
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-									</div>
-									<button class="delete"><i class="fa fa-close"></i></button>
 								</div>
-
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product02.png" alt="">
-									</div>
-									<div class="product-body">
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-									</div>
-									<button class="delete"><i class="fa fa-close"></i></button>
+								<div class="cart-summary">
+									<small>3 Item(s) selected</small>
+									<h5>SUBTOTAL: $2940.00</h5>
 								</div>
-							</div>
-							<div class="cart-summary">
-								<small>3 Item(s) selected</small>
-								<h5>SUBTOTAL: $2940.00</h5>
-							</div>
-							<div class="cart-btns">
-								<a href="#">View Cart</a>
-								<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+								<div class="cart-btns">
+									<a href="#">View Cart</a>
+									<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+								</div>
 							</div>
 						</div>
-					</div>
-					<!-- /Cart -->
+						<!-- /Cart -->
+						@endif
 
 					<!-- Menu Toogle -->
 					<div class="menu-toggle">
