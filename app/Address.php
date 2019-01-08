@@ -16,4 +16,9 @@ class Address extends Model
     ];
 
 
+    public function __toString() {
+        return  $this->street.' '.$this->zip_close.' '.$this->city;
+    }
+
+
 }

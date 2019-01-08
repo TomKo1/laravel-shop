@@ -11,6 +11,7 @@ use Session;
 use Stripe\Stripe;
 use Stripe\Charge;
 use App\Order;
+use App\Address;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -152,10 +153,10 @@ class ProductController extends Controller
             ));
 
 
-        $delivery_address = Address::get($request->input('address'));
+        $delivery_address = Address::find($request->input('address'));
 
         $order = new Order([
-            'address' => 'CHANGE ME: Sample address',
+            'address' => (string)$delivery_address,
             'name' => $order_description,
             'payment_id' => $charge->id,
             'cart' => serialize($cart)
