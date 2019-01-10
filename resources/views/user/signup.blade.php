@@ -21,12 +21,12 @@
           <input type="password" id="password" name="password" class="form-control">
         </div>
         <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" class="from-control">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control">
         </div>
         <div class="form-group">
-          <label for="surname">Surname</label>
-          <input type="text" id="surname" name="surname" class="from-control">
+            <label for="surname">Surname</label>
+            <input type="text" id="surname" name="surname" class="form-control">
         </div>
         <h2>Addresses:</h2>
         <table class="table table-bordered" id="dynamic_field">
@@ -38,7 +38,7 @@
             </tr>
         </table>
 
-        <button type="submit" class="btn btn-primary">Sign up</button>
+        <button type="submit" class="primary-btn order-submit form-control" style="margin-bottom: 30px;">Sign up</button>
         {{ csrf_field() }}
       </form>
 
@@ -49,5 +49,6 @@
 
 
 @section('scripts')
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="{{ URL::to('js/dynamic_field.js') }}"></script>
 @endsection

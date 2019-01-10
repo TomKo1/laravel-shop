@@ -11,16 +11,20 @@ use Session;
 use Stripe\Stripe;
 use Stripe\Charge;
 use App\Order;
+use App\Address;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 
 class ProductController extends Controller
 {
 
+    //TODO: not particularly good solution with categories
     public function getProducts() {
-        $products = Product::all();
-        return view('product.index')->with('products', $products);
+        $product_newest = DB::table('products')->orderBy('updated_at', 'desc')->limit(6)->get()->toArray();
+        $categories = Category::all();
+        return view('product.index', ['newest_products' => $product_newest, 'categories' => $categories]);
     }
 
 
@@ -94,7 +98,8 @@ class ProductController extends Controller
 
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+        $addresses = Auth::user()->addresses();
+        return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice, 'addresses' => $addresses]);
     }
 
     public function removeFromCart(Request $request, $id, $quantity) {
@@ -112,9 +117,14 @@ class ProductController extends Controller
         return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
+    //TODO: related products
     public function getProduct($id) {
         $product = Product::find($id);
-        return view('product.show', ['product' => $product]);
+        $categories_names = $product->categories()->pluck('name');
+        // SELECT * FROM Categories Where id in (Select id from )
+        // $related_products = Category::where('id')
+        // Category::all->where('id' = )
+        return view('product.show', ['product' => $product, 'categories_names' => $categories_names]);
     }
 
 
@@ -143,10 +153,10 @@ class ProductController extends Controller
             ));
 
 
-        $delivery_address = Address::get($request->input('address'));
+        $delivery_address = Address::find($request->input('address'));
 
         $order = new Order([
-            'address' => 'CHANGE ME: Sample address',
+            'address' => (string)$delivery_address,
             'name' => $order_description,
             'payment_id' => $charge->id,
             'cart' => serialize($cart)

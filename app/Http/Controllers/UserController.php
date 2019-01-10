@@ -33,6 +33,7 @@ class UserController extends Controller
             'surname' => $request->input('surname'),
         ]);
 
+
         $user->save();
 
         // iteraste through all addresses and add them
