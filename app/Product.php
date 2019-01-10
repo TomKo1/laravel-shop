@@ -3,9 +3,42 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
+
+    use Searchable;
+
+
+     /**
+     * Get the index name for the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'products_index';
+    }
+
+
+     /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    // TODO: override toArray somehow?
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+
+        $array['name'] =  $this->name;
+        $array['description'] = $this->description;
+        $array['brand'] = $this->brand;
+
+        return $array;
+    }
 
     /**
      * The attributes that are mass assignable.

@@ -1,6 +1,5 @@
-<input type="text" placeholder="Search here">
+@extends('layouts.master')
 
-
-@foreach ($products as $product)
-    {{ $product->name }}
-@endforeach
+@section('content')
+    @include('partials.products', ['products' => $products, 'title' => 'Results:'])
+@endsection

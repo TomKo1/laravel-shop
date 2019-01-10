@@ -89,14 +89,17 @@
 			<!-- /LOGO -->
 
 
+
+
 			<!-- SEARCH BAR -->
 			<div class="col-md-6">
 				<div class="header-search">
 					<form>
 						<select class="input-select">
 						</select>
-						<input class="input" placeholder="Search here">
-						<button class="search-btn">Search</button>
+						{{-- Note script in main.js! --}}
+						<input class="input" id="search_input" placeholder="Search here" name="query">
+						<a role="button" class="btn search-btn" href={{ route('product.search', ['query' => 'd'])}} id="search_link">Search</a>
 					</form>
 				</div>
 			</div>

@@ -15,6 +15,7 @@ use App\Address;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 
 class ProductController extends Controller
@@ -198,6 +199,13 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect('/');
+    }
+
+
+    public function search(Request $request, $query) {
+
+        $products = Product::search($query)->get();
+        return view('product.search', ['products' => $products]);
     }
 
 }

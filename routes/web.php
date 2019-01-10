@@ -107,7 +107,15 @@ Route::group(['prefix' => 'product'], function() {
         'uses' => 'ProductController@getProduct',
         'as' => 'product.show'
     ]);
+
+
 });
+
+Route::get('/search/{query}', [
+    'uses' => 'ProductController@search',
+    'as' => 'product.search'
+]);
+
 
 
 Route::group(['prefix' => 'user'], function() {

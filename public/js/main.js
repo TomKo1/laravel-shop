@@ -1,6 +1,11 @@
 (function($) {
 	"use strict"
 
+
+	$("#search_input").on('change', function(e){
+			$("#search_link").attr("href","/search/" + $(this).val());
+	});
+
 	// Mobile Nav toggle
 	$('.menu-toggle > a').on('click', function (e) {
 		e.preventDefault();
@@ -164,5 +169,9 @@
 			handle ? priceInputMax.value = value : priceInputMin.value = value
 		});
 	}
-
 })(jQuery);
+
+
+
+
+
