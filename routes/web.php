@@ -155,4 +155,10 @@ Route::group(['prefix' => 'user'], function() {
         'as' => 'user.logout',
         'middleware' => 'auth'
     ]);
+
+    Route::get('/index', [
+        'uses' => 'UserController@index',
+        'as' => 'user.index',
+        'middleware' => 'is_admin'
+    ]);
 });

@@ -23,7 +23,7 @@
 		<link rel="stylesheet" href="{{ URL::to('css/nouislider.css') }}">
 
 		<!-- Font Awesome Icon -->
-		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 		<!-- Custom stlylesheet -->
 		<link rel="stylesheet" href="{{ URL::to('css/style.css') }}">
@@ -62,6 +62,7 @@
 										<a class="dropdown-item" href={{ route('category.create') }}>Create new category</a>
 										<a class="dropdown-item" href={{ route('product.new') }}>Create new product</a>
 										<a class="dropdown-item" href={{ route('order.index') }}>Inspect all orders</a>
+										<a class="dropdown-item" href={{ route('user.index') }}>Manage all users</a>
 									</div>
 								</li>
 							@endif

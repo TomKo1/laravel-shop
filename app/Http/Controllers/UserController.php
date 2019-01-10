@@ -14,6 +14,12 @@ class UserController extends Controller
         return view('user.signup');
     }
 
+    public function index() {
+        $users = User::all();
+
+        return view('user.index', ['users' => $users]);
+    }
+
     public function postSignup(Request $request) {
         $this->validate($request, [
             'email' => 'email|required|unique:users',
