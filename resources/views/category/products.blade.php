@@ -4,9 +4,9 @@
 @endsection
 @section('content')
 <div class="section">
-        <div class="container">
-    <h1> Produckty z kategorii {{ $category->name }}</h1>
-    <hr>
+    <div class="container">
+        <h1 class="text-center"> Produkty z kategorii {{ $category->name }}</h1>
+        <hr>
 
 
         <div class="row">

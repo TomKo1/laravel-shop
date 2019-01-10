@@ -83,7 +83,7 @@
 			<!-- LOGO -->
 			<div class="col-md-3">
 				<div class="header-logo">
-					<a href="#" class="logo">
+					<a href={{ route('product.index') }} class="logo">
 						<img src="{{ asset('/images/logo.png')}}" style="height: 65%; width: 65%;">
 					</a>
 				</div>

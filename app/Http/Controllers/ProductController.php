@@ -23,8 +23,9 @@ class ProductController extends Controller
 
     //TODO: not particularly good solution with categories
     public function getProducts() {
-        $product_newest = DB::table('products')->orderBy('updated_at', 'desc')->limit(6)->get()->toArray();
+        $product_newest = Product::orderBy('updated_at', 'desc')->limit(6)->get();
         $categories = Category::all();
+
         return view('product.index', ['newest_products' => $product_newest, 'categories' => $categories]);
     }
 
@@ -127,12 +128,17 @@ class ProductController extends Controller
             // get 2 products from category
             $sub_related_prod = Category::find($category->id)
                                 ->products()
+                                ->inRandomOrder()
                                 ->where('products.id', '!=' , $id)
-                                ->limit(2)->get();
+                                ->limit(2)
+                                ->get();
 
             $related_products = $related_products->merge($sub_related_prod);
         }
 
+        // avoid product repetition
+        $related_products = $related_products->unique('id');
+        error_log('witma: '.count($related_products));
         return view('product.show', ['product' => $product, 'categories_names' => $categories_names, 'related_products' => $related_products]);
     }
 
