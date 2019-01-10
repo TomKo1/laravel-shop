@@ -26,8 +26,8 @@
                                         <div class="action">
                                             <a href={{ route('user.profile', ['id' => $user->id])}} role="button" class="btn btn-primary btn-xs" title="See profile">
                                                 <span class="fa fa-arrow-right"></span>
-                                            </a>{{--
-                                            <button type="button" class="btn btn-success btn-xs" title="Approved">
+                                            </a>
+                                            {{-- <button type="button" class="btn btn-success btn-xs" title="Approved">
                                                 <span class="glyphicon glyphicon-ok"></span>
                                             </button>
                                             <button type="button" class="btn btn-danger btn-xs" title="Delete">

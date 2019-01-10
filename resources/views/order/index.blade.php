@@ -8,7 +8,7 @@
             </div>
             <div class="panel-body">
                 <ul class="list-group">
-                    @include('partials.order', $orders)
+                    'partials.order', $orders)
 
                 </ul>
             </div>

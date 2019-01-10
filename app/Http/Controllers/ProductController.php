@@ -118,14 +118,22 @@ class ProductController extends Controller
         return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
-    //TODO: related products
+
     public function getProduct($id) {
         $product = Product::find($id);
-        $categories_names = $product->categories()->pluck('name');
-        // SELECT * FROM Categories Where id in (Select id from )
-        // $related_products = Category::where('id')
-        // Category::all->where('id' = )
-        return view('product.show', ['product' => $product, 'categories_names' => $categories_names]);
+        $categories_names = $product->categories()->select('name' , 'categories.id')->get();
+        $related_products = collect(); // empty eloquent collection
+        foreach($categories_names as $category) {
+            // get 2 products from category
+            $sub_related_prod = Category::find($category->id)
+                                ->products()
+                                ->where('products.id', '!=' , $id)
+                                ->limit(2)->get();
+
+            $related_products = $related_products->merge($sub_related_prod);
+        }
+
+        return view('product.show', ['product' => $product, 'categories_names' => $categories_names, 'related_products' => $related_products]);
     }
 
 
