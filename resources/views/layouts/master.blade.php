@@ -61,6 +61,7 @@
 									<div class="dropdown-menu" style="background: black;">
 										<a class="dropdown-item" href={{ route('category.create') }}>Create new category</a>
 										<a class="dropdown-item" href={{ route('product.new') }}>Create new product</a>
+										<a class="dropdown-item" href={{ route('order.index') }}>Inspect all orders</a>
 									</div>
 								</li>
 							@endif
