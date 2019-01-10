@@ -207,7 +207,7 @@
 		<!-- jQuery Plugins -->
 		<script src= {{ URL::to('js/jquery.min.js') }}></script>
 		<script src= {{ URL::to('js/bootstrap.min.js') }}></script>
-		{{-- <script src= {{ URL::to('js/slick.min.js') }}></script> --}}
+		<script src= {{ URL::to('js/slick.min.js') }}></script>
 		<script src= {{ URL::to('js/nouislider.min.js') }}></script>
 		{{-- <script src= {{ URL::to('js/jquery.zoom.min.js') }}></script> --}}
 		<script src= {{ URL::to('js/main.js') }}></script>
