@@ -1,9 +1,5 @@
 @extends('layouts.master')
 @section('content')
-
-
-
-
 		<!-- NAVIGATION -->
 		<nav id="navigation">
 			<!-- container -->
@@ -89,7 +85,7 @@
 														</div>
 													<div class="product-body">
 														{{-- <p class="product-category">Category</p> --}}
-														<h3 class="product-name"><a href="#">{{ $product->name }}</a></h3>
+														<h3 class="product-name"><a href={{ route('product.show', ['id' => $product->id]) }}>{{ $product->name }}</a></h3>
 														<h4 class="product-price">${{ $product->price }}</h4>
 													</div>
 													<div class="add-to-cart">
