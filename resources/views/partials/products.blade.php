@@ -14,7 +14,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="product-grid">
                     <div class="product-image">
-                        <a href="#">
+                        <a href= {{ route('product.show', ['id' => $product->id]) }}>
                             <img class="pic-1" src="{{ asset('storage/'.$product->images[0]) }}" >
 
                             <img class="pic-2" src="{{ asset('storage/'.$product->images[1]) }}" >
@@ -25,11 +25,11 @@
                         </ul>
                     </div>
                     <div class="product-content">
-                        <h3 class="title"><a href="#">{{ $product->name }}</a></h3>
+                        <h3 class="title"><a href={{ route('product.show', ['id' => $product->id]) }}>{{ $product->name }}</a></h3>
                         <div class="price">
                             ${{ $product->price }}
                         </div>
-                        <a class="add-to-cart" href={{ route('product.addToCart', ['id' => $product->id]) }} role="button">+ Dodaj do koszyka</a>
+                        <a class="add-to-cart" href={{ route('product.addToCart', ['id' => $product->id]) }} role="button">+ Add to cart</a>
                     </div>
                 </div>
             </div>
