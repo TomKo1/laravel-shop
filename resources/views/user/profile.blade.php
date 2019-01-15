@@ -9,7 +9,7 @@
                     <div class="card-title mb-4">
                         <div class="d-flex justify-content-start">
                             <div class="image-container">
-                                <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                <img src="http://bootdey.com/img/Content/avatar/avatar7.png" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                 <div class="middle">
                                     <input type="file" style="display: none;" id="profilePicture" name="file" />
                                 </div>
@@ -40,7 +40,7 @@
 
                                     <div class="row">
                                         <div class="col-sm-3 col-md-2 col-5">
-                                            <label style="font-weight:bold;">Full Name</label>
+                                        <label style="font-weight:bold;">Address {{ $loop->iteration }}:</label>
                                         </div>
                                         <div class="col-md-8 col-6">
                                     {{ $address->street }}
