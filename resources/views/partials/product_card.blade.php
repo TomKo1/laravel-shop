@@ -11,7 +11,20 @@
     </div>
     <div class="add-to-cart">
         {{-- fa-shopping-cart --}}
-            <a class="add-to-cart-btn" href={{ route('product.addToCart', ['id' => $product->id]) }} role="button"><i class="fa"></i> Add to cart</a>
+        @if(Auth::check())
+              @if(!Auth::user()->isAdmin())
+                <a class="add-to-cart-btn" href={{ route('product.addToCart', ['id' => $product->id]) }} role="button"><i class="fa"></i> Add to cart</a>
+              @endif
+                {{-- <a class="add-to-cart-btn btn" style="margin-top: 5px;" href={{ route('product.destroy', ['id' => $product->id]) }} role="button"><i class="fa"></i> Remove item</a> --}}
+
+              @if(Auth::user()->isAdmin())
+                <form action={{ route('product.destroy', ['id' => $product->id]) }} method="POST" style="margin-top: 5px;">
+                    @method('DELETE')
+                    @csrf
+                  <button type="submit" class="btn btn-danger" style="mergin-top: 20px;">Delete this product</button>
+                </form>
+            @endif
+          @endif
     </div>
 </div>
 <!-- /product -->
