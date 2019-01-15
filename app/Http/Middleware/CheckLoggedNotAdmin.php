@@ -21,6 +21,6 @@ class CheckLoggedNotAdmin
             }
         }
 
-        return redirect('/');
+        return redirect('user/signin');
     }
 }

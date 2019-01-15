@@ -11,6 +11,9 @@
     </div>
     <div class="add-to-cart">
         {{-- fa-shopping-cart --}}
+        @if(Auth::guest())
+            <a class="add-to-cart-btn" href={{ route('product.addToCart', ['id' => $product->id]) }} role="button"><i class="fa"></i> Add to cart</a>
+        @endif
         @if(Auth::check())
               @if(!Auth::user()->isAdmin())
                 <a class="add-to-cart-btn" href={{ route('product.addToCart', ['id' => $product->id]) }} role="button"><i class="fa"></i> Add to cart</a>
